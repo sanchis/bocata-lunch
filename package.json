@@ -25,6 +25,9 @@
       "next",
       "next/core-web-vitals"
     ],
+    "rules": {
+      "strict-boolean-expressions": "off"
+    },
     "parserOptions": {
       "project": "./tsconfig.json"
     }
