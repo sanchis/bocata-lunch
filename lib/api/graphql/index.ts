@@ -1,23 +1,11 @@
 import { gql, ApolloServer } from 'apollo-server-micro'
 import { IncomingMessage, ServerResponse } from 'http'
-import { BocataService } from '../services'
+import typesDefs from './typeDefs'
+import resolvers from './resolvers'
 
 const typeDefs = gql`
-    type Bocata {
-        id: ID!
-        name: String!
-    }
-
-    type Query {
-        bocataList: [Bocata]!
-    }
+    ${typesDefs}
 `
-
-const resolvers = {
-  Query: {
-    bocataList: async () => await BocataService.getBocataList()
-  }
-}
 
 export async function createApolloServer (req: IncomingMessage, res: ServerResponse): Promise<void> {
   if (req.method === 'OPTIONS') {
