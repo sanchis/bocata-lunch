@@ -4,5 +4,6 @@ export default gql`
     type Bocata {
         id: ID!
         name: String!
+        price: Float
     }
 `

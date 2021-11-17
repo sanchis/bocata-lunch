@@ -8,4 +8,5 @@ export interface BocataUnique{
 
 export interface BocataPartial{
   name: string
+  price: number
 }

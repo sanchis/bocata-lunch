@@ -2,7 +2,8 @@ import { gql } from 'apollo-server-micro'
 
 export default gql`
     type Mutation {
-        bocataList: [Bocata]!
-        bocata(id: String!): Bocata
+        createBocata(name: String!, price: Float): Bocata!
+        updateBocata(name: String!, price: Float, id:ID!): Bocata!
+        deleteBocata(id: ID!): Boolean
     }
 `
