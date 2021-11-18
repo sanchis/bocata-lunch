@@ -1,5 +1,7 @@
 import BocataRepository from '../repositories/Bocata'
+import IngredientRepository from '../repositories/Ingredient'
 import BocataSrv from './Bocata'
+import IngredientSrv from './Ingredient'
 
-const repository = new BocataRepository()
-export const BocataService = new BocataSrv(repository)
+export const BocataService = new BocataSrv(new BocataRepository())
+export const IngredientService = new IngredientSrv(new IngredientRepository())
