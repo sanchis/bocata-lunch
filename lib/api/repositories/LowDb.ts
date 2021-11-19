@@ -8,12 +8,12 @@ export abstract class LowDbRepository<FullProps, PartialProps, UniqueProps> impl
     this.db = new Low<FullProps[]>(adapter)
   }
 
-  private async getData (): Promise<FullProps[]> {
+  protected async getData (): Promise<FullProps[]> {
     await this.db.read()
     return this.db.data ?? []
   }
 
-  private async setData (data: FullProps[]): Promise<FullProps[]> {
+  protected async setData (data: FullProps[]): Promise<FullProps[]> {
     this.db.data = data
     await this.db.write()
     return this.db.data
@@ -54,9 +54,16 @@ export abstract class LowDbRepository<FullProps, PartialProps, UniqueProps> impl
     return data.find(dataFind => this.exactObjValues(this.extractKeyObj(dataFind, findProps), findProps))
   }
 
-  async filter (findProps: any): Promise<FullProps[]> {
+  async includeIds (findProps: UniqueProps[]): Promise<FullProps[]> {
     const data = await this.getData()
-    return data.filter(dataFind => this.exactObjValues(this.extractKeyObj(dataFind, findProps), findProps))
+    const result: FullProps[] = []
+    findProps.forEach(props => {
+      const foundedIngredient = data.find(dataFind => this.exactObjValues(this.extractKeyObj(dataFind, findProps), findProps))
+      if (foundedIngredient != null) {
+        result.push(foundedIngredient)
+      }
+    })
+    return result
   }
 
   async exist (findProps: any): Promise<boolean> {

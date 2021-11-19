@@ -5,6 +5,7 @@ export default gql`
         id: ID!
         name: String!
         price: Float
+        ingredients: [Ingredient]
     }
 
     type Ingredient {

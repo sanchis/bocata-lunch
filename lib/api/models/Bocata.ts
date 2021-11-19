@@ -1,3 +1,5 @@
+import { Ingredient } from './Ingredient'
+
 export interface Bocata extends BocataPartial, BocataUnique {
 
 }
@@ -9,4 +11,5 @@ export interface BocataUnique{
 export interface BocataPartial{
   name: string
   price: number
+  ingredients: Ingredient[]
 }
